@@ -1,0 +1,23 @@
+# MyPMAgent — Hermes cli-config.yaml
+# Maps to §5.2 of CLAUDE.md. Note: Hermes uses cli-config.yaml (not config.yaml).
+# The API server section is the key addition — it enables /v1/* endpoints on :8642.
+
+model:
+  default: "gpt-4o-mini"
+  provider: "openai"
+  # api_key read from OPENAI_API_KEY env var
+  base_url: "https://api.openai.com/v1"
+
+memory:
+  enabled: true
+  scope: session
+
+api_server:
+  enabled: true
+  port: 8642
+  host: "0.0.0.0"
+  # API_SERVER_KEY env var sets the bearer token required by clients
+
+skills:
+  extra_dirs:
+    - "/root/.hermes/skills/mypmagent"

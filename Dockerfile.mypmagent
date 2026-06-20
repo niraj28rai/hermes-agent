@@ -1,0 +1,23 @@
+# Builds Hermes from source with mypmagent config baked in.
+# Uses the same base approach as the main Dockerfile but slimmed for our needs.
+# The main Dockerfile (Debian + s6-overlay) handles production; this targets local dev.
+FROM debian:trixie-slim
+WORKDIR /app
+
+ENV PYTHONUNBUFFERED=1
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV API_SERVER_ENABLED=true
+ENV API_SERVER_PORT=8642
+ENV API_SERVER_HOST=0.0.0.0
+
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    python3 python3-pip python3-venv python-is-python3 \
+    git curl ripgrep ca-certificates && \
+    rm -rf /var/lib/apt/lists/*
+
+COPY . .
+RUN pip install -e ".[all]" --break-system-packages
+
+EXPOSE 8642
+CMD ["hermes", "gateway", "run"]
