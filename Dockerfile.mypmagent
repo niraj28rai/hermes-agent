@@ -16,8 +16,11 @@ RUN apt-get update && \
     git curl ripgrep ca-certificates && \
     rm -rf /var/lib/apt/lists/*
 
+RUN python3 -m venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
+
 COPY . .
-RUN pip install -e ".[all]" --break-system-packages
+RUN pip install -e ".[all]"
 
 EXPOSE 8642
 CMD ["hermes", "gateway", "run"]
