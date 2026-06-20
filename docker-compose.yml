@@ -21,7 +21,7 @@ services:
       - API_SERVER_PORT=8642
       - API_SERVER_HOST=0.0.0.0
     volumes:
-      - ./cli-config.yaml:/root/.hermes/cli-config.yaml:ro
+      - ./hermes-config.yaml:/root/.hermes/config.yaml:ro
       - ./skills/mypmagent:/root/.hermes/skills/mypmagent:ro
       - hermes_data:/root/.hermes/data
     restart: unless-stopped

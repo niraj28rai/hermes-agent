@@ -1,0 +1,9 @@
+# Hermes runtime config for MyPMAgent
+# Mounted to /root/.hermes/config.yaml by docker-compose.yml
+# Do NOT put secrets here — keys come from .env (docker-compose env_file)
+model:
+  default: gpt-4o-mini
+  provider: custom
+  base_url: https://api.openai.com/v1
+  api_mode: chat_completions
+  max_tokens: 16000
